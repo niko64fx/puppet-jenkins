@@ -43,11 +43,16 @@
 # Copyright 2016 Rudy YAYON.
 #
 class jenkins (
-  $package_name     = 'jenkins',
-  $package_ensure   = installed,
+  $package_name   = 'jenkins',
+  $package_ensure = installed,
+  $service_name   = 'jenkins',
+  $service_ensure = running,
+  $service_enable = true,
+  $if_noop        = $::clientnoop,
 ) {
 
   class { '::jenkins::install': } ->
+  class { '::jenkins::service': } ->
   Class['::jenkins']
 
 }
